@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- BASE:START (managed by Coding Agent — do not edit) -->
+<base href="/agi-chatbot-platform/">
+<!-- BASE:END -->
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+
+<!-- SEO Meta Tags -->
+<title>Unlock the Future with AGI Chatbots</title>
+<meta name="description" content="Discover how our AGI chatbot platform uses general intelligence to transform digital interactions and business automation." />
+<meta name="keywords" content="AGI chatbot" />
+<meta property="og:title" content="Unlock the Future with AGI Chatbots" />
+<meta property="og:description" content="Discover how our AGI chatbot platform uses general intelligence to transform digital interactions and business automation." />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Unlock the Future with AGI Chatbots" />
+<meta name="twitter:description" content="Discover how our AGI chatbot platform uses general intelligence to transform digital interactions and business automation." />
+<!-- End SEO Meta Tags -->
+
+<meta name="llm-proxy-url" content="https://paymegpt.com/api/landing-pages/public/agi-chatbot-general-intelligence/llm">
+<meta name="llm-providers" content="openai">
+<meta name="llm-gate-required" content="false">
+
+<script data-field-replace>
+(function(){
+  var params=new URLSearchParams(window.location.search);
+  var fields={};
+  var paramMap={
+    'first_name':'firstName','last_name':'lastName','full_name':'fullName',
+    'email':'email','phone':'phone','company':'company',
+    'city':'city','state':'state','country':'country'
+  };
+  var skipTags={'SCRIPT':1,'STYLE':1,'NOSCRIPT':1,'TEXTAREA':1,'CODE':1,'PRE':1};
+  var hasUrlFields=false;
+  for(var p in paramMap){
+    var v=params.get(p);
+    if(v){fields[paramMap[p]]=v;hasUrlFields=true;}
+  }
+  var contactId=params.get('contact_id');
+  function esc(s){
+    if(!s)return s;
+    var d=document.createElement('div');
+    d.appendChild(document.createTextNode(s));
+    return d.innerHTML;
+  }
+  function doReplace(data){
+    var r={};
+    r['{{full_name}}']=esc(((data.firstName||'')+' '+(data.lastName||'')).trim()||((data.fullName||data.name)||''));
+    r['{{first_name}}']=esc(data.firstName||(data.name?data.name.split(' ')[0]:'')||'');
+    r['{{last_name}}']=esc(data.lastName||(data.name&&data.name.indexOf(' ')>-1?data.name.substring(data.name.indexOf(' ')+1):'')||'');
+    r['{{email}}']=esc(data.email||'');
+    r['{{phone}}']=esc(data.phone||'');
+    r['{{company}}']=esc(data.company||'');
+    r['{{city}}']=esc(data.city||'');
+    r['{{state}}']=esc(data.state||'');
+    r['{{country}}']=esc(data.country||'');
+    r['{{date}}']=new Date().toLocaleDateString();
+    r['{{time}}']=new Date().toLocaleTimeString();
+    r['{{location}}']=[data.city,data.state,data.country].filter(Boolean).join(', ');
+    r['{{tracking_id}}']=esc(data.trackingId||'');
+    r['{{lastClickedProduct}}']=esc(data.lastClickedProduct||'');
+    r['{{lastProductClickDate}}']=esc(data.lastProductClickDate||'');
+    r['{{lastClickedProductPrice}}']=esc(data.lastClickedProductPrice||'');
+    r['{{lastClickedProductURL}}']=esc(data.lastClickedProductURL||'');
+    r['{{productsClickedCount}}']=esc(data.productsClickedCount||'0');
+    r['{{ip_address}}']=esc(data.ipAddress||'');
+    r['{{ip}}']=esc(data.ipAddress||'');
+    if(data.customFields){
+      for(var k in data.customFields){
+        r['{{'+k+'}}']=esc(String(data.customFields[k]||''));
+      }
+    }
+    params.forEach(function(v,k){
+      if(!paramMap[k]&&k!=='contact_id'&&k!=='page_id'&&k.indexOf('utm_')!==0){
+        r['{{'+k+'}}']=esc(v);
+      }
+    });
+    var hasValues=false;
+    for(var key in r){if(r[key]){hasValues=true;break;}}
+    if(!hasValues)return;
+    var walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{
+      acceptNode:function(n){
+        var p=n.parentNode;
+        if(p&&skipTags[p.nodeName])return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    var node;
+    while(node=walker.nextNode()){
+      var txt=node.nodeValue;
+      if(txt&&txt.indexOf('{{')>-1){
+        var changed=txt;
+        for(var ph in r){
+          if(r[ph]&&changed.indexOf(ph)>-1){
+            changed=changed.split(ph).join(r[ph]);
+          }
+        }
+        if(changed!==txt)node.nodeValue=changed;
+      }
+    }
+    var attrs=['value','placeholder','content','alt','title'];
+    attrs.forEach(function(attr){
+      var els=document.querySelectorAll('['+attr+'*="{{"]');
+      for(var i=0;i<els.length;i++){
+        var tag=els[i].tagName;
+        if(skipTags[tag])continue;
+        var val=els[i].getAttribute(attr);
+        if(val){
+          var nv=val;
+          for(var ph in r){
+            if(r[ph]&&nv.indexOf(ph)>-1){
+              nv=nv.split(ph).join(r[ph]);
+            }
+          }
+          if(nv!==val)els[i].setAttribute(attr,nv);
+        }
+      }
+    });
+  }
+  function run(){
+    if(contactId){
+      var xhr=new XMLHttpRequest();
+      xhr.open('GET','https://paymegpt.com/api/landing/context/'+encodeURIComponent(contactId)+'?page_id=4012');
+      xhr.onload=function(){
+        if(xhr.status===200){
+          try{
+            var resp=JSON.parse(xhr.responseText);
+            if(resp.success&&resp.contact){
+              var merged=resp.contact;
+              for(var k in fields){merged[k]=fields[k];}
+              doReplace(merged);
+              return;
+            }
+          }catch(e){}
+        }
+        if(hasUrlFields)doReplace(fields);
+      };
+      xhr.onerror=function(){if(hasUrlFields)doReplace(fields);};
+      xhr.send();
+    }else if(hasUrlFields){
+      doReplace(fields);
+    }
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',run);}
+  else{run();}
+})();
+</script>
+<script data-payment>
+(function(){
+  var slug='5RFKVwB';
+  var apiBase='https://paymegpt.com';
+  function findEmail(){
+    var ids=['email','emailAddress','buyer-email','buyerEmail','user-email','userEmail','checkout-email','customer-email','contact-email'];
+    for(var i=0;i<ids.length;i++){var el=document.getElementById(ids[i]);if(el&&el.value&&el.value.includes('@'))return el.value.trim();}
+    var inputs=document.querySelectorAll('input[type="email"],input[name*="email"],input[placeholder*="email"],input[placeholder*="Email"]');
+    for(var j=0;j<inputs.length;j++){if(inputs[j].value&&inputs[j].value.includes('@'))return inputs[j].value.trim();}
+    return '';
+  }
+  function findName(){
+    var ids=['name','fullName','full-name','buyer-name','buyerName','customer-name','userName','user-name'];
+    for(var i=0;i<ids.length;i++){var el=document.getElementById(ids[i]);if(el&&el.value)return el.value.trim();}
+    var inputs=document.querySelectorAll('input[name*="name"]:not([name*="email"]):not([type="email"]),input[placeholder*="name"]:not([placeholder*="email"]):not([type="email"]),input[placeholder*="Name"]:not([type="email"])');
+    for(var j=0;j<inputs.length;j++){if(inputs[j].value)return inputs[j].value.trim();}
+    return '';
+  }
+  var __realProcessPayment=function(a,b,c,d,e){
+    var amountCents,email,productName,productDescription,customerName,quantity;
+    if(a&&typeof a==='object'){
+      amountCents=a.amountCents;email=a.email;productName=a.productName;
+      productDescription=a.productDescription||'';customerName=a.name||'';quantity=a.quantity||1;
+    }else{
+      amountCents=typeof a==='number'?a:0;productName=typeof b==='string'?b:'';
+      productDescription=typeof c==='string'?c:'';email='';customerName='';quantity=1;
+    }
+    if(!email)email=findEmail();
+    if(!customerName)customerName=findName();
+    if(!productName){alert('Product name is required.');return Promise.reject('no_product_name');}
+    if(!amountCents||amountCents<100){alert('Amount must be at least $1.00');return Promise.reject('invalid_amount');}
+    if(!email){alert('Please enter your email address.');return Promise.reject('no_email');}
+    var successBase=window.location.href.split('?')[0];
+    return fetch(apiBase+'/api/landing-pages/public/'+slug+'/payment/checkout',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({email:email,name:customerName,amountCents:amountCents,productName:productName,productDescription:productDescription,quantity:quantity,successUrl:successBase+'?payment=success&product='+encodeURIComponent(productName)+'&session_id={CHECKOUT_SESSION_ID}',cancelUrl:successBase+'?payment=cancelled'})
+    }).then(function(r){return r.json();}).then(function(d){
+      if(d.checkoutUrl){window.location.href=d.checkoutUrl;}
+      else{alert(d.error||'Failed to process payment');throw new Error(d.error);}
+    });
+  };
+  Object.defineProperty(window,'__processPayment',{value:__realProcessPayment,writable:false,configurable:false});
+  document.addEventListener('DOMContentLoaded',function(){
+    var urlParams=new URLSearchParams(window.location.search);
+    if(urlParams.get('payment')==='success'){
+      var pName=urlParams.get('product')||'your item';
+      var overlay=document.createElement('div');overlay.id='payment-success-overlay';
+      overlay.style.cssText='position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:999999;font-family:system-ui,-apple-system,sans-serif;';
+      overlay.innerHTML='<div style="background:white;border-radius:16px;padding:40px;max-width:420px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.15);"><div style="width:64px;height:64px;border-radius:50%;background:#dcfce7;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><h2 style="margin:0 0 12px;font-size:24px;font-weight:700;color:#111827;">Payment Successful!</h2><p style="margin:0 0 24px;color:#6b7280;font-size:16px;">Thank you for purchasing '+pName.replace(/</g,'&lt;').replace(/>/g,'&gt;')+'.</p><button onclick="document.getElementById(\'payment-success-overlay\').remove();window.history.replaceState({},\'\',window.location.pathname);" style="padding:12px 32px;font-size:16px;font-weight:600;background:#16a34a;color:white;border:none;border-radius:8px;cursor:pointer;">Continue</button></div>';
+      document.body.appendChild(overlay);
+    }
+  });
+})();
+</script>  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-slate-950">
+  <!-- ============================================================================ -->
+  <!-- AI CHAT ASSISTANT CONTAINER: Full-screen mobile-friendly chat application   -->
+  <!-- Features: Real-time text responses, typing indicator, message limit,         -->
+  <!-- paywall, and conversation history. Dark mode theme with gradient backgrounds.-->
+  <!-- ============================================================================ -->
+  <div class="chat-container">
+    <!-- HEADER -->
+    <header data-section="header" class="bg-gradient-to-r from-slate-900 to-slate-800 text-white px-4 py-4 shadow-2xl border-b border-slate-700">
+      <div class="max-w-2xl mx-auto">
+        <h1 class="text-xl font-bold">💬 AI Chat Assistant</h1>
+        <p class="text-slate-400 text-sm">Powered by OpenAI GPT</p>
+      </div>
+    </header>
+
+    <!-- MESSAGES AREA -->
+    <div class="messages-area" id="messagesContainer">
+      <div class="max-w-2xl mx-auto flex flex-col gap-2">
+        <!-- Welcome message -->
+        <div class="flex justify-start">
+          <div class="ai-message message-bubble">
+            <p class="text-sm">👋 Hello! I'm your AI assistant. You have 10 free messages. Ask me anything!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- INPUT AREA -->
+    <div class="input-area">
+      <div class="max-w-2xl mx-auto">
+        <form id="chatForm" class="flex gap-2">
+          <input
+            type="text"
+            id="messageInput"
+            placeholder="Type your message..."
+            class="flex-1 px-4 py-3 border border-slate-600 rounded-full bg-slate-800 text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm transition-colors"
+            autocomplete="off"
+            required
+          >
+          <button
+            type="submit"
+            class="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 py-3 rounded-full font-semibold transition-all duration-200 active:scale-95 flex-shrink-0 shadow-lg"
+            id="sendBtn"
+          >
+            Send
+          </button>
+        </form>
+        <p class="text-xs text-slate-500 mt-2 text-center">
+          <span id="messageCounter">10 messages remaining</span> • Powered by GPT-4o Mini
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================================ -->
+  <!-- PAYWALL MODAL: Payment prompt displayed after message limit reached          -->
+  <!-- Features: Email capture, payment processing via Stripe, modal overlay       -->
+  <!-- Dark mode styling with enhanced visibility and contrast                     -->
+  <!-- ============================================================================ -->
+  <div id="paywallModal" class="paywall-overlay hidden">
+    <div class="paywall-modal">
+      <h2 class="text-2xl font-bold text-slate-100 mb-4">Continue Chatting</h2>
+      <p class="text-slate-400 mb-6">You've used your 10 free messages. Unlock unlimited chat for just $1.</p>
+
+      <form id="paymentForm" class="space-y-4">
+        <div>
+          <label for="paymentEmail" class="block text-sm font-medium text-slate-300 mb-2">Email Address</label>
+          <input
+            type="email"
+            id="paymentEmail"
+            name="email"
+            placeholder="your@email.com"
+            class="w-full px-4 py-2 border border-slate-600 rounded-lg bg-slate-700 text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm transition-colors"
+            required
+          >
+        </div>
+
+        <div>
+          <label for="paymentName" class="block text-sm font-medium text-slate-300 mb-2">Name (Optional)</label>
+          <input
+            type="text"
+            id="paymentName"
+            name="name"
+            placeholder="Your name"
+            class="w-full px-4 py-2 border border-slate-600 rounded-lg bg-slate-700 text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm transition-colors"
+          >
+        </div>
+
+        <button
+          type="button"
+          id="unlockBtn"
+          class="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white py-3 rounded-lg font-semibold transition-all duration-200 active:scale-95 shadow-lg"
+        >
+          Unlock for $1.00
+        </button>
+
+        <button
+          type="button"
+          id="closePaywallBtn"
+          class="w-full bg-slate-700 hover:bg-slate-600 text-slate-100 py-2 rounded-lg font-medium transition-colors duration-200"
+        >
+          Cancel
+        </button>
+      </form>
+
+      <p class="text-xs text-slate-500 mt-4 text-center">Secure payment powered by Stripe</p>
+    </div>
+  </div>
+
+  <!-- ============================================================================ -->
+  <!-- CHAT SCRIPT: Handles text conversations, API calls, message limits          -->
+  <!-- Features: LLM proxy integration, message counter, payment processing        -->
+  <!-- ============================================================================ -->
+  <script>
+    (function() {
+      // ===== CONFIGURATION =====
+      // Get LLM proxy URL and available providers from meta tags
+      const proxy = document.querySelector('meta[name="llm-proxy-url"]')?.content;
+      const available = (document.querySelector('meta[name="llm-providers"]')?.content || '')
+        .split(',')
+        .map(p => p.trim())
+        .filter(Boolean);
+
+      // Check if OpenAI is available via proxy
+      const hasOpenAI = available.includes('openai');
+
+      // ===== MESSAGE LIMIT CONFIGURATION =====
+      // Maximum free messages before paywall
+      const MAX_FREE_MESSAGES = 10;
+      let messageCount = 0;
+      let isPaid = false;
+
+      // ===== DOM ELEMENTS =====
+      const messagesContainer = document.getElementById('messagesContainer');
+      const chatForm = document.getElementById('chatForm');
+      const messageInput = document.getElementById('messageInput');
+      const sendBtn = document.getElementById('sendBtn');
+      const messageCounter = document.getElementById('messageCounter');
+      const paywallModal = document.getElementById('paywallModal');
+      const paymentForm = document.getElementById('paymentForm');
+      const unlockBtn = document.getElementById('unlockBtn');
+      const closePaywallBtn = document.getElementById('closePaywallBtn');
+      const paymentEmail = document.getElementById('paymentEmail');
+      const paymentName = document.getElementById('paymentName');
+
+      // ===== UPDATE MESSAGE COUNTER =====
+      // Function: updateMessageCounter()
+      // Purpose: Display remaining free messages or paid status
+      function updateMessageCounter() {
+        if (isPaid) {
+          messageCounter.textContent = '✓ Unlimited messages';
+        } else {
+          const remaining = MAX_FREE_MESSAGES - messageCount;
+          messageCounter.textContent = `${remaining} message${remaining !== 1 ? 's' : ''} remaining`;
+        }
+      }
+
+      // ===== SHOW PAYWALL MODAL =====
+      // Function: showPaywall()
+      // Purpose: Display payment prompt after message limit reached
+      function showPaywall() {
+        paywallModal.classList.remove('hidden');
+        paymentEmail.focus();
+      }
+
+      // ===== HIDE PAYWALL MODAL =====
+      // Function: hidePaywall()
+      // Purpose: Close payment modal
+      function hidePaywall() {
+        paywallModal.classList.add('hidden');
+      }
+
+      // ===== CHECK MESSAGE LIMIT =====
+      // Function: checkMessageLimit()
+      // Purpose: Determine if user has reached free message limit
+      // Returns: true if limit reached and not paid, false otherwise
+      function checkMessageLimit() {
+        if (!isPaid && messageCount >= MAX_FREE_MESSAGES) {
+          return true;
+        }
+        return false;
+      }
+
+      // ===== ADD TEXT MESSAGE TO UI =====
+      // Function: addMessage(text, role)
+      // Purpose: Display a new text message in the chat interface
+      // Parameters: text (message content), role ('user' or 'ai')
+      function addMessage(text, role) {
+        const messagesDiv = messagesContainer.querySelector('.max-w-2xl');
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `flex justify-${role === 'user' ? 'end' : 'start'}`;
+
+        const bubble = document.createElement('div');
+        bubble.className = `message-bubble ${role === 'user' ? 'user-message' : 'ai-message'} message-enter`;
+        bubble.innerHTML = `<p class="text-sm break-words">${escapeHtml(text)}</p>`;
+
+        messageDiv.appendChild(bubble);
+        messagesDiv.appendChild(messageDiv);
+
+        // Auto-scroll to bottom
+        setTimeout(() => {
+          messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }, 0);
+
+        return messageDiv;
+      }
+
+      // ===== TYPING INDICATOR =====
+      // Function: showTypingIndicator()
+      // Purpose: Display animated typing dots while AI generates response
+      function showTypingIndicator() {
+        const messagesDiv = messagesContainer.querySelector('.max-w-2xl');
+        const typingDiv = document.createElement('div');
+        typingDiv.className = 'flex justify-start';
+        typingDiv.id = 'typingIndicator';
+
+        const typingBubble = document.createElement('div');
+        typingBubble.className = 'ai-message flex gap-1';
+        typingBubble.innerHTML = '<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>';
+
+        typingDiv.appendChild(typingBubble);
+        messagesDiv.appendChild(typingDiv);
+
+        setTimeout(() => {
+          messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }, 0);
+      }
+
+      // ===== REMOVE TYPING INDICATOR =====
+      // Function: removeTypingIndicator()
+      // Purpose: Hide typing dots after response is received
+      function removeTypingIndicator() {
+        const typingDiv = document.getElementById('typingIndicator');
+        if (typingDiv) {
+          typingDiv.remove();
+        }
+      }
+
+      // ===== ESCAPE HTML =====
+      // Function: escapeHtml(text)
+      // Purpose: Prevent XSS by escaping HTML characters in user input
+      function escapeHtml(text) {
+        const map = {
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#039;'
+        };
+        return text.replace(/[&<>"']/g, m => map[m]);
+      }
+
+      // ===== SEND MESSAGE =====
+      // Function: sendMessage(userText)
+      // Purpose: Send user message and get AI response via OpenAI proxy
+      // Triggers: Form submission
+      async function sendMessage(userText) {
+        if (!userText.trim()) return;
+
+        // Check if user has reached message limit
+        if (checkMessageLimit()) {
+          showPaywall();
+          return;
+        }
+
+        // Increment message counter
+        messageCount++;
+        updateMessageCounter();
+
+        // Add user message to UI
+        addMessage(userText, 'user');
+        messageInput.value = '';
+        messageInput.focus();
+
+        // Show typing indicator
+        showTypingIndicator();
+        sendBtn.disabled = true;
+
+        try {
+          // Check if proxy and OpenAI are available
+          if (!proxy || !hasOpenAI) {
+            removeTypingIndicator();
+            addMessage('⚠️ Chat service is not configured. Please set up your OpenAI API key.', 'ai');
+            sendBtn.disabled = false;
+            return;
+          }
+
+          // Call OpenAI chat completion via proxy
+          const response = await fetch(proxy + '/openai', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              model: 'gpt-4o-mini',
+              messages: [
+                {
+                  role: 'system',
+                  content: 'You are a helpful, friendly AI assistant. Provide clear, concise responses.'
+                },
+                {
+                  role: 'user',
+                  content: userText
+                }
+              ],
+              temperature: 0.7,
+              max_tokens: 500
+            })
+          });
+
+          if (!response.ok) {
+            throw new Error(`API error: ${response.status} ${response.statusText}`);
+          }
+
+          const data = await response.json();
+          const aiResponse = data.choices?.[0]?.message?.content;
+
+          if (!aiResponse) {
+            throw new Error('No response from AI');
+          }
+
+          // Remove typing indicator
+          removeTypingIndicator();
+
+          // Add AI response to UI
+          addMessage(aiResponse, 'ai');
+
+        } catch (error) {
+          console.error('Chat error:', error);
+          removeTypingIndicator();
+          addMessage(`❌ Error: ${error.message}. Please try again.`, 'ai');
+        } finally {
+          sendBtn.disabled = false;
+          messageInput.focus();
+
+          // Check if next message would exceed limit
+          if (checkMessageLimit()) {
+            setTimeout(() => {
+              addMessage('💳 You\'ve reached your free message limit. Unlock unlimited chat for just $1!', 'ai');
+            }, 500);
+          }
+        }
+      }
+
+      // ===== PROCESS PAYMENT =====
+      // Function: processPayment()
+      // Purpose: Submit payment to Stripe Checkout via __processPayment
+      // Triggers: User clicks "Unlock for $1.00" button
+      function processPayment() {
+        const email = paymentEmail.value.trim();
+        const name = paymentName.value.trim();
+
+        if (!email) {
+          alert('Please enter your email address.');
+          paymentEmail.focus();
+          return;
+        }
+
+        // Validate email format
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+          alert('Please enter a valid email address.');
+          paymentEmail.focus();
+          return;
+        }
+
+        // Disable button during processing
+        unlockBtn.disabled = true;
+        unlockBtn.textContent = 'Processing...';
+
+        // Call Stripe payment processor
+        // Amount: $1.00 = 100 cents
+        window.__processPayment({
+          amountCents: 100,
+          email: email,
+          productName: 'Unlimited AI Chat',
+          productDescription: 'Unlock unlimited messages with AI Assistant',
+          name: name || undefined
+        });
+      }
+
+      // ===== FORM SUBMISSION HANDLER =====
+      // Function: handleFormSubmit(e)
+      // Purpose: Capture form submission and send message
+      // Triggers: User clicks Send button or presses Enter
+      chatForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const userText = messageInput.value.trim();
+        if (userText) {
+          sendMessage(userText);
+        }
+      });
+
+      // ===== ENTER KEY SUPPORT =====
+      // Allow Shift+Enter for new line, Enter alone to submit
+      messageInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          chatForm.dispatchEvent(new Event('submit'));
+        }
+      });
+
+      // ===== PAYWALL BUTTON HANDLERS =====
+      // Function: Unlock payment button click
+      unlockBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        processPayment();
+      });
+
+      // Function: Close paywall button click
+      closePaywallBtn.addEventListener('click', () => {
+        hidePaywall();
+        messageInput.focus();
+      });
+
+      // ===== INITIAL STATE =====
+      // Focus input on page load and display message counter
+      messageInput.focus();
+      updateMessageCounter();
+    })();
+  </script>
+</body>
+</html>
